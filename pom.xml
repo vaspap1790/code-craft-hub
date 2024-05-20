@@ -12,6 +12,10 @@
     <name>code-craft-hub</name>
     <description>The parent project for the Spring Boot microservices</description>
 
+    <modules>
+        <module>user-management</module>
+    </modules>
+
     <properties>
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
