@@ -5,7 +5,9 @@ import com.vaspap.usermanagement.model.SubscriptionPlan;
 import com.vaspap.usermanagement.model.User;
 import com.vaspap.usermanagement.model.UserDto;
 import com.vaspap.usermanagement.repository.UserRepository;
+import org.springframework.stereotype.Service;
 
+@Service
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;

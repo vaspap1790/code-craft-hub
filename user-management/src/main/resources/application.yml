@@ -1,17 +1,6 @@
-server:
-  port: 8080
-
 spring:
   application:
     name: user-management
-  datasource:
-    url: jdbc:postgresql://localhost:5432/code_craft_hub
-    username: postgres
-    password: postgres_password
-  jpa:
-    hibernate:
-      ddl-auto: update
-    show-sql: true
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+db:
+  name: code_craft_hub
