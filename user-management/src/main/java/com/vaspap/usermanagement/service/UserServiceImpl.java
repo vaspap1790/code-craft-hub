@@ -6,6 +6,8 @@ import com.vaspap.usermanagement.factory.UserFactoryProducer;
 import com.vaspap.usermanagement.dto.UserDto;
 import com.vaspap.usermanagement.model.User;
 import com.vaspap.usermanagement.repository.UserRepository;
+import com.vaspap.usermanagement.state.SubscriptionState;
+import com.vaspap.usermanagement.state.SubscriptionStateFactory;
 import com.vaspap.usermanagement.utils.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,11 +21,14 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final UserFactoryProducer userFactoryProducer;
+    private final SubscriptionStateFactory subscriptionStateFactory;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, UserFactoryProducer userFactoryProducer) {
+    public UserServiceImpl(UserRepository userRepository, UserFactoryProducer userFactoryProducer,
+                           SubscriptionStateFactory subscriptionStateFactory) {
         this.userRepository = userRepository;
         this.userFactoryProducer = userFactoryProducer;
+        this.subscriptionStateFactory = subscriptionStateFactory;
     }
 
     @Override
@@ -33,6 +38,9 @@ public class UserServiceImpl implements UserService {
         UserFactory userFactory = userFactoryProducer.getFactory(registerUserRequest.role().name());
         User user = userFactory.createUser(registerUserRequest.username(), registerUserRequest.password(),
                 registerUserRequest.subscription());
+
+        SubscriptionState subscriptionState = subscriptionStateFactory.getState(registerUserRequest.subscription().name());
+        user.setSubscriptionState(subscriptionState);
 
         userRepository.save(user);
 

@@ -1,6 +1,7 @@
 package com.vaspap.usermanagement.model;
 
 import com.vaspap.usermanagement.dto.UserDto;
+import com.vaspap.usermanagement.state.SubscriptionState;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -11,6 +12,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -30,6 +32,9 @@ public abstract class User {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private SubscriptionPlan subscription;
+
+    @Transient
+    private SubscriptionState subscriptionState;
 
     public User() {}
 
@@ -51,6 +56,10 @@ public abstract class User {
 
     public void setSubscription(SubscriptionPlan subscription) {
         this.subscription = subscription;
+    }
+
+    public void setSubscriptionState(SubscriptionState subscriptionState) {
+        this.subscriptionState = subscriptionState;
     }
 
     public Long getId() {
