@@ -1,5 +1,6 @@
 package com.vaspap.usermanagement.model;
 
+import com.vaspap.usermanagement.dto.UserDto;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -7,11 +8,14 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
 import jakarta.persistence.Table;
 
 @Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @Table(name = "db_user")
-public class User {
+public abstract class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,15 +33,12 @@ public class User {
 
     public User() {}
 
-    public User(String username, String password, Role role, SubscriptionPlan subscription) {
-        this.username = username;
-        this.password = password;
-        this.role = role;
-        this.subscription = subscription;
-    }
-
     public UserDto toUserDto() {
         return new UserDto(this.username, this.role, this.subscription);
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public void setPassword(String password) {
