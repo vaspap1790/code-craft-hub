@@ -8,7 +8,7 @@ import com.vaspap.usermanagement.model.User;
 import com.vaspap.usermanagement.repository.UserRepository;
 import com.vaspap.usermanagement.state.SubscriptionState;
 import com.vaspap.usermanagement.state.SubscriptionStateFactory;
-import com.vaspap.usermanagement.utils.UserValidator;
+import com.vaspap.usermanagement.util.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

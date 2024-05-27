@@ -1,4 +1,4 @@
-package com.vaspap.usermanagement.utils;
+package com.vaspap.usermanagement.util;
 
 import com.vaspap.usermanagement.dto.RegisterUserRequest;
 
