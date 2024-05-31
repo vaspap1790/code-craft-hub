@@ -44,7 +44,7 @@ class UserControllerTest {
     @Test
     public void registerUser_ShouldReturnCreated_WhenUserRegistrationIsSuccessful() throws Exception {
         // given
-        RegisterUserRequest request = TestData.createRegisterUserRequest();
+        RegisterUserRequest request = TestData.createValidRegisterUserRequest();
         UserDto userDto = TestData.createUserDto();
 
         // when
@@ -66,7 +66,7 @@ class UserControllerTest {
     @Test
     public void registerUser_ShouldReturnConflict_WhenDataIntegrityViolationOccurs() throws Exception {
         // given
-        RegisterUserRequest request = TestData.createRegisterUserRequest();
+        RegisterUserRequest request = TestData.createValidRegisterUserRequest();
 
         // when
         doThrow(new DataIntegrityViolationException("")).when(userService).registerUser(any(RegisterUserRequest.class));
@@ -84,7 +84,7 @@ class UserControllerTest {
     @Test
     public void registerUser_ShouldReturnBadRequest_WhenIllegalArgumentExceptionOccurs() throws Exception {
         // given
-        RegisterUserRequest request = TestData.createRegisterUserRequest();
+        RegisterUserRequest request = TestData.createValidRegisterUserRequest();
 
         // when
         doThrow(new IllegalArgumentException("")).when(userService).registerUser(any(RegisterUserRequest.class));
@@ -102,7 +102,7 @@ class UserControllerTest {
     @Test
     public void registerUser_ShouldReturnInternalServerError_WhenUnexpectedExceptionOccurs() throws Exception {
         // given
-        RegisterUserRequest request = TestData.createRegisterUserRequest();
+        RegisterUserRequest request = TestData.createValidRegisterUserRequest();
 
         // when
         doThrow(new RuntimeException("")).when(userService).registerUser(any(RegisterUserRequest.class));
