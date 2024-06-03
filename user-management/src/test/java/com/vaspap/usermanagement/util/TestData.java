@@ -7,6 +7,11 @@ import com.vaspap.usermanagement.model.Role;
 import com.vaspap.usermanagement.model.SubscriptionPlan;
 
 public class TestData {
+
+    public static final String BASE_URL = "/api/v1/users";
+    public static final String REGISTER_URL = "/register";
+    public static final String LOGIN_URL = "/login";
+
     public static RegisterUserRequest createValidRegisterUserRequest() {
         return new RegisterUserRequest("username", "password", Role.ADMIN, SubscriptionPlan.FREE);
     }

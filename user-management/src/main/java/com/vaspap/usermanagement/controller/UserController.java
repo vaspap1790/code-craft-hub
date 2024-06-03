@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import static com.vaspap.usermanagement.util.MessageConstants.*;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,12 +23,6 @@ import java.util.logging.Logger;
 public final class UserController {
 
     private static final Logger LOGGER = Logger.getLogger(UserController.class.getName());
-
-    public static final String DATA_INTEGRITY_VIOLATION_MESSAGE = "Data integrity violation while registering user: ";
-    public static final String ILLEGAL_ARGUMENT_MESSAGE = "Illegal argument while registering user: ";
-    public static final String UNEXPECTED_ERROR_REGISTER_MESSAGE = "Unexpected error while registering user: ";
-    public static final String INVALID_USERNAME_OR_PASSWORD_MESSAGE = "Invalid username or password for user: ";
-    public static final String UNEXPECTED_ERROR_LOGIN_MESSAGE = "Unexpected error while logging in user: ";
 
     private final UserService userService;
 
