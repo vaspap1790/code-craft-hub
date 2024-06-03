@@ -21,10 +21,12 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <spring-boot-starter-data-jpa.version>3.2.5</spring-boot-starter-data-jpa.version>
+        <spring-boot-starter-security.version>3.2.4</spring-boot-starter-security.version>
+
         <postgresql.version>42.7.2</postgresql.version>
         <h2.version>2.2.224</h2.version>
-        <jackson-databind.version>2.17.0</jackson-databind.version>
 
+        <jackson-databind.version>2.17.0</jackson-databind.version>
         <mockito.version>5.11.0</mockito.version>
     </properties>
 
@@ -34,6 +36,13 @@
             <artifactId>spring-boot-starter-data-jpa</artifactId>
             <version>${spring-boot-starter-data-jpa.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+            <version>${spring-boot-starter-security.version}</version>
+        </dependency>
+
+
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>

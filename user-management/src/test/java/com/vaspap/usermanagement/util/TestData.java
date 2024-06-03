@@ -1,5 +1,6 @@
-package util;
+package com.vaspap.usermanagement.util;
 
+import com.vaspap.usermanagement.dto.LoginUserRequest;
 import com.vaspap.usermanagement.dto.RegisterUserRequest;
 import com.vaspap.usermanagement.dto.UserDto;
 import com.vaspap.usermanagement.model.Role;
@@ -8,6 +9,10 @@ import com.vaspap.usermanagement.model.SubscriptionPlan;
 public class TestData {
     public static RegisterUserRequest createValidRegisterUserRequest() {
         return new RegisterUserRequest("username", "password", Role.ADMIN, SubscriptionPlan.FREE);
+    }
+
+    public static LoginUserRequest createLoginUserRequest() {
+        return new LoginUserRequest("username", "password");
     }
 
     public static RegisterUserRequest createRegisterUserRequestInvalidUsername() {

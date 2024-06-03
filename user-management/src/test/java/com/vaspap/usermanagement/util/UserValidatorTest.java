@@ -1,6 +1,5 @@
 package com.vaspap.usermanagement.util;
 import org.junit.jupiter.api.Test;
-import util.TestData;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertFalse;

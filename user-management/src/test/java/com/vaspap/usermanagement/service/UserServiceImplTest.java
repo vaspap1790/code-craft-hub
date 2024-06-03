@@ -1,7 +1,9 @@
 package com.vaspap.usermanagement.service;
 
+import com.vaspap.usermanagement.dto.LoginUserRequest;
 import com.vaspap.usermanagement.dto.RegisterUserRequest;
 import com.vaspap.usermanagement.dto.UserDto;
+import com.vaspap.usermanagement.exception.AuthenticationFailedException;
 import com.vaspap.usermanagement.factory.UserFactory;
 import com.vaspap.usermanagement.factory.UserFactoryProducer;
 import com.vaspap.usermanagement.model.User;
@@ -13,7 +15,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import util.TestData;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import com.vaspap.usermanagement.util.TestData;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -36,6 +39,9 @@ class UserServiceImplTest {
     @Mock
     private SubscriptionStateFactory subscriptionStateFactory;
 
+    @Mock
+    private BCryptPasswordEncoder passwordEncoder;
+
     @InjectMocks
     private UserServiceImpl userServiceImpl;
 
@@ -55,7 +61,7 @@ class UserServiceImplTest {
 
         // when
         when(userFactoryProducer.getFactory(validRequest.role().name())).thenReturn(userFactory);
-        when(userFactory.createUser(anyString(), anyString(), any())).thenReturn(user);
+        when(passwordEncoder.encode(anyString())).thenAnswer(invocation -> new BCryptPasswordEncoder().encode((String) invocation.getArgument(0)));        when(userFactory.createUser(anyString(), anyString(), any())).thenReturn(user);
         when(subscriptionStateFactory.getState(validRequest.subscription().name())).thenReturn(subscriptionState);
         when(user.toUserDto()).thenReturn(TestData.createUserDto());
 
@@ -77,5 +83,30 @@ class UserServiceImplTest {
 
         // then
         verify(userRepository, never()).save(any(User.class));
+    }
+
+    @Test
+    public void testLoginUser_Success() {
+        // given
+        LoginUserRequest validRequest = TestData.createLoginUserRequest();
+        when(userRepository.findByUsername(validRequest.username())).thenReturn(user);
+        when(passwordEncoder.matches(validRequest.password(), user.getPassword())).thenReturn(true);
+        when(user.toUserDto()).thenReturn(TestData.createUserDto());
+
+        // when
+        UserDto userDto = userServiceImpl.loginUser(validRequest);
+
+        // then
+        assertNotNull(userDto);
+    }
+
+    @Test
+    public void testLoginUser_Failure() {
+        // given
+        LoginUserRequest invalidRequest = TestData.createLoginUserRequest();
+        when(userRepository.findByUsername(invalidRequest.username())).thenReturn(null);
+
+        // when
+        assertThrows(AuthenticationFailedException.class, () -> userServiceImpl.loginUser(invalidRequest));
     }
 }
