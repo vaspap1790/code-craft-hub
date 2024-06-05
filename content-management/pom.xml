@@ -9,54 +9,35 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>user-management</artifactId>
+    <artifactId>content-management</artifactId>
     <packaging>jar</packaging>
 
-    <name>user-management</name>
-    <description>user-management</description>
+    <name>content-management</name>
+    <description>content-management</description>
 
     <properties>
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <spring-boot-starter-data-jpa.version>3.2.5</spring-boot-starter-data-jpa.version>
-        <spring-boot-starter-security.version>3.2.4</spring-boot-starter-security.version>
-
-        <postgresql.version>42.7.2</postgresql.version>
-        <h2.version>2.2.224</h2.version>
-
-        <jackson-databind.version>2.17.0</jackson-databind.version>
+        <mongodb.version>3.2.5</mongodb.version>
+        <mongodb-mock.version>4.13.1</mongodb-mock.version>
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
-            <version>${spring-boot-starter-data-jpa.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
-            <version>${spring-boot-starter-security.version}</version>
-        </dependency>
 
         <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-            <version>${postgresql.version}</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-mongodb</artifactId>
+            <version>${mongodb.version}</version>
         </dependency>
 
+        <!-- Embedded MongoDB for Testing -->
         <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <scope>runtime</scope>
-            <version>${h2.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <version>${jackson-databind.version}</version>
+            <groupId>de.flapdoodle.embed</groupId>
+            <artifactId>de.flapdoodle.embed.mongo</artifactId>
+            <version>${mongodb-mock.version}</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.mockito</groupId>
